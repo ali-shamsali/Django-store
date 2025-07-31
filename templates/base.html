@@ -1717,36 +1717,20 @@
             <div class="middle-bar-footer">
                 <div class="col-lg-6 col-xs-12 pull-right">
                     <div class="footer-links">
-                        <div class="links-col">
-                            <a href="#" class="head-line">راهنمای خرید از دیجی‌استور</a>
-                            <ul class="links-ul">
-                                <li><a href="#">نحوه ثبت سفارش</a></li>
-                                <li><a href="#">رویه ارسال سفارش</a></li>
-                                <li><a href="#">شیوه‌های پرداخت</a></li>
-                            </ul>
-                        </div>
+                        {% for category in footer_categories %}
+                            <div class="links-col">
+                                <a href="#" class="head-line"> {{ category.title }} </a>
+                                <ul class="links-ul">
+                                    {% for item in category.items.all %}
+                                        {% if item.status %}
+                                            <li><a href="{{ item.link }}">{{ item.label }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
 
-                        <div class="links-col">
-                            <a href="#" class="head-line">خدمات مشتریان</a>
-                            <ul class="links-ul">
-                                <li><a href="#">پرسش یه پاسخ های متداول</a></li>
-                                <li><a href="#">رویه های بازگرداندن کالا</a></li>
-                                <li><a href="#">شرایط استفاده</a></li>
-                                <li><a href="#">حریم خصوصی</a></li>
-                                <li><a href="#">گزارش باگ</a></li>
-                            </ul>
-                        </div>
 
-                        <div class="links-col">
-                            <a href="#" class="head-line">با دیجی استور</a>
-                            <ul class="links-ul">
-                                <li><a href="#">اتاق خبر دیجی استور</a></li>
-                                <li><a href="#">فروش در دیجی استور</a></li>
-                                <li><a href="#">فرصت های شغلی</a></li>
-                                <li><a href="#">تماس با دیجی استور</a></li>
-                                <li><a href="#">درباره ما دیجی استور</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
@@ -1782,9 +1766,8 @@
                 <div class="footer-contact">
                     <ul>
                         <li>هفت روز هفته ، ۲۴ ساعت شبانه‌روز پاسخگوی شما هستیم</li>
-                        <li style="float:right">شماره تماس : <a href="#" class="phone-contact">۶۱۹۳۰۰۰۰ - ۰۲۱ ، ۹۵۱۱۹۰۹۵
-                                - ۰۲۱</a></li>
-                        <li class="email-title">آدرس ایمیل : <a href="#">info@digistore.com</a></li>
+                        <li style="float:right"> {{ footer_settings.label_number }} <a href="#" class="phone-contact">{{ footer_settings.text_number }}</a></li>
+                        <li class="email-title">{{ footer_settings.label_email }}<a href="#"> {{ footer_settings.text_email }}</a></li>
                     </ul>
                 </div>
 
