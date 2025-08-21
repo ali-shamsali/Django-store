@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'root',
     'footer',
     'faq',
+    'accounts',
 ]
 
 MIDDLEWARE = [
