@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
-{% block 'title' %}Login{% endblock 'title' %}
+{% block 'title' %}ورود به دیجی استور{% endblock 'title' %}
 {% block 'content' %}
 <div id="main">
     <div class="col-lg-4 col-md-6 col-xs-12 mx-auto">
         <div class="account-box">
             <a href="index.html" class="logo-account"><img src="{% static 'assets/images/logo-login.png' %}" alt="logo"></a>
             <span class="account-head-line">ورود به دیجی‌استور</span>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             <div class="content-account">
-                <form action="#" id="login">
+                <form method="post" action="{% url 'accounts:login' %}" id="login">
+                    {% csrf_token %}
                     <label for="email-phone">شماره موبایل یا پست الکترونیک خود را وارد کنید</label>
-                    <input type="text" id="email-phone" class="input-email-account" placeholder="">
+                    <input name="username" type="text" id="email-phone" class="input-email-account" placeholder="">
                     <a href="password-forget.html" class="account-link-password">رمز خود را فراموش کرده ام</a>
                     <label for="password">رمز عبور</label>
-                    <input type="password" id="password" class="input-password" placeholder="">
+                    <input name="password" type="password" id="password" class="input-password" placeholder="">
                     <div class="parent-btn">
                         <button class="dk-btn dk-btn-info">
                             ورود به دیجی استور
