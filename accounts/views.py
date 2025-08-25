@@ -42,3 +42,6 @@ def views_logout(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('accounts:login')
+
+def change_password(request):
+    return render(request,'accounts/password-change.html')
