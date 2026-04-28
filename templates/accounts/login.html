@@ -15,7 +15,7 @@
             <div class="content-account">
                 <form method="post" action="{% url 'accounts:login' %}" id="login">
                     {% csrf_token %}
-                    <label for="email-phone">شماره موبایل یا پست الکترونیک خود را وارد کنید</label>
+                    <label for="email-phone">کد ملی خود را وارد کنید</label>
                     <input name="username" type="text" id="email-phone" class="input-email-account" placeholder="">
                     <a href="password-forget.html" class="account-link-password">رمز خود را فراموش کرده ام</a>
                     <label for="password">رمز عبور</label>
@@ -37,7 +37,7 @@
             </div>
             <div class="account-footer">
                 <span>کاربر جدید هستید؟</span>
-                <a href="register.html" class="btn-link-register">ثبت‌نام در دیجی‌استور</a>
+                <a href="signup" class="btn-link-register">ثبت‌نام در دیجی‌استور</a>
             </div>
         </div>
     </div>

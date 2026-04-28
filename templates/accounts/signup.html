@@ -10,24 +10,43 @@
             </a>
             <span class="account-head-line">ثبت نام در دیجی‌استور</span>
             <div class="content-account">
-                <div class="massege-light">ثبت نام تنها با شماره تلفن همراه امکان پذیر است.</div>
 
-                <form method="post" id="register">
+                <div class="massege-light">ثبت نام با کد ملی و رمز عبور امکان پذیر است.</div>
+
+                <form method="post" id="register" enctype="multipart/form-data"> 
                     {% csrf_token %}
 
                     {{ form.non_field_errors }}
 
-                    <label for="id_username">شماره موبایل یا پست الکترونیک خود را وارد کنید</label>
-                    {{ form.username.errors }}
-                    <input type="text" name="username" id="id_username" class="input-email-account" value="{{ form.username.value|default_if_none:'' }}">
+                    <label for="id_id_code">کد ملی خود را وارد کنید</label>
+                    {% if form.id_code.errors %}
+                        <div class="alert alert-danger">{{ form.id_code.errors }}</div>
+                    {% endif %}
+                    <input type="text" name="id_code" id="id_id_code" class="input-email-account" value="{{ form.id_code.value|default_if_none:'' }}" maxlength="10" pattern="[0-9]{10}" title="کد ملی باید ۱۰ رقم باشد" required>
+
+                    <label for="id_email">پست الکترونیک (اختیاری)</label>
+                    {% if form.email.errors %}
+                        <div class="alert alert-danger">{{ form.email.errors }}</div>
+                    {% endif %}
+                    <input type="email" name="email" id="id_email" class="input-email-account" value="{{ form.email.value|default_if_none:'' }}">
+
+                    <label for="id_image">تصویر پروفایل (اختیاری)</label>
+                    {% if form.image.errors %}
+                        <div class="alert alert-danger">{{ form.image.errors }}</div>
+                    {% endif %}
+                    <input type="file" name="image" id="id_image" accept="image/*">
 
                     <label for="id_password1">رمز عبور</label>
-                    {{ form.password1.errors }}
-                    <input type="password" name="password1" id="id_password1" class="input-password">
+                    {% if form.password1.errors %}
+                        <div class="alert alert-danger">{{ form.password1.errors }}</div>
+                    {% endif %}
+                    <input type="password" name="password1" id="id_password1" class="input-password" required>
 
                     <label for="id_password2">تکرار رمز عبور</label>
-                    {{ form.password2.errors }}
-                    <input type="password" name="password2" id="id_password2" class="input-password">
+                    {% if form.password2.errors %}
+                        <div class="alert alert-danger">{{ form.password2.errors }}</div>
+                    {% endif %}
+                    <input type="password" name="password2" id="id_password2" class="input-password" required>
 
                     <div class="parent-btn">
                         <button type="submit" class="dk-btn dk-btn-info">
@@ -38,7 +57,7 @@
 
                     <div class="form-auth-row">
                         <label for="remember" class="ui-checkbox">
-                            <input type="checkbox" value="1" name="agree" id="remember" required>
+                            <input type="checkbox" name="agree" id="remember" required>
                             <span class="ui-checkbox-check"></span>
                         </label>
                         <label for="remember" class="remember-me">
